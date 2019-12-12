@@ -84,6 +84,12 @@ class SplitDlg(QtWidgets.QDialog):
         self.chkMerge = QtWidgets.QCheckBox("Merge Back")
         self.chkMerge.setToolTip("Merges back the processing products formed in the individual cells")
 
+        self.chkClassify = QtWidgets.QCheckBox("Classify")
+        self.chkClassify.setToolTip("Classifies the individual chunks")
+
+        self.chkExport = QtWidgets.QCheckBox("Export Points")
+        self.chkExport.setToolTip("Export points from individual chunks")
+
         self.chkSave = QtWidgets.QCheckBox("Autosave")
         self.chkSave.setToolTip("Autosaves the project after each operation")
 
@@ -202,6 +208,8 @@ class SplitDlg(QtWidgets.QDialog):
         buildDense = self.chkDense.isChecked()
         mergeBack = self.chkMerge.isChecked()
         autosave = self.chkSave.isChecked()
+        classify = self.chkClassify.isChecked()
+        export = self.chkExport.isChecked()
 
         quality = DENSE[self.denseBox.currentText()]
         mesh_mode = MESH[self.meshBox.currentText()]
@@ -358,32 +366,28 @@ class SplitDlg(QtWidgets.QDialog):
         if autosave:
             doc.save()
         # Mod classify chunks
-        try:
-            classify
-        except NameError:
-            return False
-        else:
-            if classify:
-                for i in range(len(Metashape.app.document.chunks)):
-                    if i + 1 < (len(Metashape.app.document.chunks)):
-                        Metashape.app.document.chunks[i + 1].dense_cloud.classifyPoints(confidence = 0.0)
+        if classify:
+            for i in range(len(Metashape.app.document.chunks)):
+                if i + 1 < (len(Metashape.app.document.chunks)):
+                    Metashape.app.document.chunks[i + 1].dense_cloud.classifyPoints(confidence = 0.0)
         # Fim Mod classify
         # Save .laz
-        for i in range(len(Metashape.app.document.chunks)):
-            if i + 1 < (len(Metashape.app.document.chunks)):
-                full_path = (Metashape.app.document.path.split('/'))
-                n = 0
-                tt_path = ''
-                for n in range(len(full_path)) :
-                    if (n < (len(full_path)-1)) :
-                        tt_path = tt_path + full_path[i] + "/"
+        if export:
+            for i in range(len(Metashape.app.document.chunks)):
+                if i + 1 < (len(Metashape.app.document.chunks)):
+                    full_path = (Metashape.app.document.path.split('/'))
+                    n = 0
+                    tt_path = ''
+                    for n in range(len(full_path)) :
+                        if (n < (len(full_path)-1)) :
+                            tt_path = tt_path + full_path[i] + "/"
 
-                        es_curr_chunk = Metashape.app.document.chunk.label
-                        crs = Metashape.CoordinateSystem("EPSG::31984")
-                        Metashape.app.document.chunks[i + 1].exportPoints(tt_path+es_curr_chunk+'.laz', binary = True, precision = 6, normals = True, colors = True, format = Metashape.PointsFormatLAZ,  projection = crs)
-                        # End save Laz
-                        if autosave:
-                            doc.save()
+                            es_curr_chunk = Metashape.app.document.chunk.label
+                            crs = Metashape.CoordinateSystem("EPSG::31984")
+                            Metashape.app.document.chunks[i + 1].exportPoints(tt_path+es_curr_chunk+'.laz', binary = True, precision = 6, normals = True, colors = True, format = Metashape.PointsFormatLAZ,  projection = crs)
+                            # End save Laz
+                            if autosave:
+                                doc.save()
 
         print("Script finished!")
         return True
