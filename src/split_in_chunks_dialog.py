@@ -382,14 +382,15 @@ class SplitDlg(QtWidgets.QDialog):
                     tt_path = ''
                     for n in range(len(full_path)) :
                         if (n < (len(full_path)-1)) :
-                            tt_path = tt_path + full_path[i] + "/"
+                            tt_path = tt_path + full_path[n] + "/"
 
-                            es_curr_chunk = Metashape.app.document.chunk.label
-                            crs = Metashape.CoordinateSystem("EPSG::31984")
-                            Metashape.app.document.chunks[i + 1].exportPoints(tt_path+es_curr_chunk+'.laz', binary = True, precision = 6, normals = True, colors = True, format = Metashape.PointsFormatLAZ,  projection = crs)
-                            # End save Laz
-                            if autosave:
-                                doc.save()
+                    es_curr_chunk = Metashape.app.document.chunk.label
+
+                    crs = Metashape.CoordinateSystem("EPSG::31984")
+                    Metashape.app.document.chunks[i + 1].exportPoints(tt_path+es_curr_chunk+'.laz', binary = True, precision = 6, normals = True, colors = True, format = Metashape.PointsFormatLAZ,  projection = crs)
+                    # End save Laz
+                    if autosave:
+                        doc.save()
 
         print("Script finished!")
         return True
