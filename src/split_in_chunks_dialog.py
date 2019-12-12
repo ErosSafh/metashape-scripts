@@ -361,7 +361,7 @@ class SplitDlg(QtWidgets.QDialog):
         try:
             classify
         except NameError :
-        else:
+        else
             if classify:
                 for i in range(len(Metashape.app.document.chunks)):
                     if i + 1 < (len(Metashape.app.document.chunks)):
