@@ -360,8 +360,10 @@ class SplitDlg(QtWidgets.QDialog):
         # Mod classify chunks
         try:
             classify
-        except NameError :
-            elif classify:
+        except NameError:
+            continue
+        else:
+            if classify:
                 for i in range(len(Metashape.app.document.chunks)):
                     if i + 1 < (len(Metashape.app.document.chunks)):
                         Metashape.app.document.chunks[i + 1].dense_cloud.classifyPoints(confidence = 0.0)
