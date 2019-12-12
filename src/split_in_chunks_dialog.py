@@ -234,8 +234,14 @@ class SplitDlg(QtWidgets.QDialog):
 
         for j in range(1, partsY + 1):  # creating new chunks and adjusting bounding box
             for i in range(1, partsX + 1):
+                # Mod para continuar o processamento a partir do ultimo chunk processado
+                chunk_labels = [ichunk.label for ichunk in Metashape.app.document.chunks]
+                if  "Chunk " + str(i) + "_" + str(j) in chunk_labels:
+                    continue
+                # fim do Mod
                 if not buildDense:
                     new_chunk = chunk.copy(items=[Metashape.DataSource.DenseCloudData, Metashape.DataSource.DepthMapsData])
+
                 else:
                     new_chunk = chunk.copy(items=[])
                 new_chunk.label = "Chunk " + str(i) + "_" + str(j)
@@ -351,6 +357,27 @@ class SplitDlg(QtWidgets.QDialog):
 
         if autosave:
             doc.save()
+            
+        # Mod classify chunks
+        for i in range(len(Metashape.app.document.chunks)):
+            if i + 1 < (len(Metashape.app.document.chunks)):
+                Metashape.app.document.chunks[i + 1].dense_cloud.classifyPoints(confidence = 0.0)
+                # Save .laz
+                full_path = (Metashape.app.document.path.split('/'))
+                i = 0
+                tt_path = ''
+                for i in range(len(full_path)) :
+                    if (i < (len(full_path)-1)) :
+                    tt_path = tt_path + full_path[i] + "/"
+
+                    es_curr_chunk = Metashape.app.document.chunk.label
+
+                    crs = Metashape.CoordinateSystem("EPSG::31984")
+                    Metashape.app.document.chunk.exportPoints(tt_path+es_curr_chunk+'.laz', binary = True, precision = 6, normals = True, colors = True, format = Metashape.PointsFormatLAZ,  projection = crs)
+                # End save Laz
+                    if autosave: 
+                        doc.save()
+        # Fim Mod classify
 
         print("Script finished!")
         return True
