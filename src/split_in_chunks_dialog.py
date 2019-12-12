@@ -361,11 +361,10 @@ class SplitDlg(QtWidgets.QDialog):
         try:
             classify
         except NameError :
-        else
-            if classify:
-                for i in range(len(Metashape.app.document.chunks)):
-                    if i + 1 < (len(Metashape.app.document.chunks)):
-                        Metashape.app.document.chunks[i + 1].dense_cloud.classifyPoints(confidence = 0.0)
+        elif classify:
+            for i in range(len(Metashape.app.document.chunks)):
+                if i + 1 < (len(Metashape.app.document.chunks)):
+                    Metashape.app.document.chunks[i + 1].dense_cloud.classifyPoints(confidence = 0.0)
         # Fim Mod classify
         # Save .laz
         for i in range(len(Metashape.app.document.chunks)):
