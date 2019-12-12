@@ -384,7 +384,7 @@ class SplitDlg(QtWidgets.QDialog):
                         if (n < (len(full_path)-1)) :
                             tt_path = tt_path + full_path[n] + "/"
 
-                    es_curr_chunk = Metashape.app.document.chunk.label
+                    es_curr_chunk = Metashape.app.document.chunks[n + 1].label
 
                     crs = Metashape.CoordinateSystem("EPSG::31984")
                     Metashape.app.document.chunks[i + 1].exportPoints(tt_path+es_curr_chunk+'.laz', binary = True, precision = 6, normals = True, colors = True, format = Metashape.PointsFormatLAZ,  projection = crs)
