@@ -367,10 +367,10 @@ class SplitDlg(QtWidgets.QDialog):
         for i in range(len(Metashape.app.document.chunks)):
             if i + 1 < (len(Metashape.app.document.chunks)):
                 full_path = (Metashape.app.document.path.split('/'))
-                i = 0
+                n = 0
                 tt_path = ''
-                for i in range(len(full_path)) :
-                    if (i < (len(full_path)-1)) :
+                for n in range(len(full_path)) :
+                    if (n < (len(full_path)-1)) :
                         tt_path = tt_path + full_path[i] + "/"
 
                         es_curr_chunk = Metashape.app.document.chunk.label
