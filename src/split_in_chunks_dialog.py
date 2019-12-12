@@ -137,6 +137,8 @@ class SplitDlg(QtWidgets.QDialog):
         layout.addWidget(self.meshBox, 1, 3, QtCore.Qt.AlignTop)
         layout.addWidget(self.denseBox, 1, 2, QtCore.Qt.AlignTop)
 
+        layout.addWidget(self.chkClassify, 2, 3)
+        layout.addWidget(self.chkExport, 2, 4)
         layout.addWidget(self.chkSave, 3, 2)
         layout.addWidget(self.btnP1, 3, 3)
         layout.addWidget(self.btnQuit, 3, 4)
