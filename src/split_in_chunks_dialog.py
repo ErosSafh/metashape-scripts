@@ -51,8 +51,8 @@ class SplitDlg(QtWidgets.QDialog):
         QtWidgets.QDialog.__init__(self, parent)
         self.setWindowTitle("Split in chunks")
 
-        self.gridX = 3
-        self.gridY = 4
+        self.gridX = 2
+        self.gridY = 2
         self.gridWidth = 198
         self.gridHeight = 198
 
