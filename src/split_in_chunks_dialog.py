@@ -398,6 +398,12 @@ class SplitDlg(QtWidgets.QDialog):
                         doc.save()
         if cloud:
 
+
+
+
+
+
+
         print("Script finished!")
         return True
 
