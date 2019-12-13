@@ -396,9 +396,6 @@ class SplitDlg(QtWidgets.QDialog):
                     # End save Laz
                     if autosave:
                         doc.save()
-        if cloud:
-
-
 
 
 
