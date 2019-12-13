@@ -396,6 +396,33 @@ class SplitDlg(QtWidgets.QDialog):
                     # End save Laz
                     if autosave:
                         doc.save()
+        if cloud:
+            import subprocess
+            import os
+            FNULL = open(os.devnull, 'w')    #use this if you want to suppress output to stdout from the subprocess
+            file_to_open = " -o -GLOBAL_SHIFT AUTO "
+            file_to_open_current = ''
+            open_string = r"cloudcompare -AUTO_SAVE OFF "
+            close_string = " -MERGE_CLOUDS -SAVE_CLOUDS"
+            operations = " -SS SPATIAL 0.05"
+            parte_do_meio = ''
+            for a in range(len(Metashape.app.document.chunks)):
+                if a + 1 < (len(Metashape.app.document.chunks)):
+                    full_path = (Metashape.app.document.path.split('/'))
+                    n = 0
+                    tt_path = ''
+                    for n in range(len(full_path)) :
+                        if (n < (len(full_path)-1)):
+                            tt_path = tt_path + full_path[n] + "/"
+
+                    es_curr_chunk =  Metashape.app.document.chunks[a + 1].label
+
+                    file_to_open_current = "\"" + tt_path + es_curr_chunk + "\"" + ".laz"
+                    parte_do_meio = parte_do_meio + file_to_open + file_to_open_current + operations
+            args = open_string + parte_do_meio + close_string
+            subprocess.call(args, stdout=FNULL, stderr=FNULL, shell=False)
+            if autosave:
+                doc.save()
 
 
 
