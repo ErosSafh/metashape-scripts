@@ -53,8 +53,8 @@ class SplitDlg(QtWidgets.QDialog):
 
         self.gridX = 2
         self.gridY = 2
-        self.gridWidth = 210
-        self.gridHeight = 210
+        self.gridWidth = 250
+        self.gridHeight = 250
 
         self.spinX = QtWidgets.QSpinBox()
         self.spinX.setMinimum(1)
