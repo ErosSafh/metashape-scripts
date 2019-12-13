@@ -402,7 +402,7 @@ class SplitDlg(QtWidgets.QDialog):
             FNULL = open(os.devnull, 'w')    #use this if you want to suppress output to stdout from the subprocess
             file_to_open = " -o -GLOBAL_SHIFT AUTO "
             file_to_open_current = ''
-            open_string = r"cloudcompare -SILENT -AUTO_SAVE OFF "
+            open_string = r"cloudcompare -SILENT -C_EXPORT_FMT LAZ -AUTO_SAVE OFF "
             close_string = " -MERGE_CLOUDS -SAVE_CLOUDS"
             operations = " -SS SPATIAL 0.05"
             parte_do_meio = ''
