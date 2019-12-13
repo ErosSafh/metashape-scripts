@@ -53,8 +53,8 @@ class SplitDlg(QtWidgets.QDialog):
 
         self.gridX = 2
         self.gridY = 2
-        self.gridWidth = 198
-        self.gridHeight = 198
+        self.gridWidth = 210
+        self.gridHeight = 210
 
         self.spinX = QtWidgets.QSpinBox()
         self.spinX.setMinimum(1)
@@ -140,9 +140,9 @@ class SplitDlg(QtWidgets.QDialog):
         layout.addWidget(self.meshBox, 1, 3, QtCore.Qt.AlignTop)
         layout.addWidget(self.denseBox, 1, 2, QtCore.Qt.AlignTop)
 
-        layout.addWidget(self.chkCloud, 2.5, 4)
-        layout.addWidget(self.chkClassify, 2.5, 2)
-        layout.addWidget(self.chkExport, 2.5, 3)
+        layout.addWidget(self.chkCloud, 2, 4)
+        layout.addWidget(self.chkClassify, 2, 2)
+        layout.addWidget(self.chkExport, 2, 3)
         layout.addWidget(self.chkSave, 3, 2)
         layout.addWidget(self.btnP1, 3, 3)
         layout.addWidget(self.btnQuit, 3, 4)
