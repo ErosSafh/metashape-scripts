@@ -405,7 +405,7 @@ class SplitDlg(QtWidgets.QDialog):
             open_string = r"cloudcompare -SILENT -AUTO_SAVE OFF -C_EXPORT_FMT LAS "
             close_string = " -MERGE_CLOUDS -SAVE_CLOUDS"
             operations = " -SS SPATIAL 0.05"
-            parte_do_meio = ''
+            middle = ''
             for a in range(len(Metashape.app.document.chunks)):
                 if a + 1 < (len(Metashape.app.document.chunks)):
                     full_path = (Metashape.app.document.path.split('/'))
@@ -418,8 +418,8 @@ class SplitDlg(QtWidgets.QDialog):
                     es_curr_chunk =  Metashape.app.document.chunks[a + 1].label
 
                     file_to_open_current = "\"" + tt_path + es_curr_chunk + "\"" + ".laz"
-                    parte_do_meio = parte_do_meio + file_to_open + file_to_open_current + operations
-            args = open_string + parte_do_meio + close_string
+                    middle = middle + file_to_open + file_to_open_current + operations
+            args = open_string + middle + close_string
             subprocess.call(args, stdout=FNULL, stderr=FNULL, shell=False)
             if autosave:
                 doc.save()
