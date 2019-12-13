@@ -87,6 +87,9 @@ class SplitDlg(QtWidgets.QDialog):
         self.chkClassify = QtWidgets.QCheckBox("Classify")
         self.chkClassify.setToolTip("Classifies the individual chunks")
 
+        self.chkCloud = QtWidgets.QCheckBox("Cloud Compare")
+        self.chkCloud.setToolTip("Subsamples chunks and merges them (Check 'Export Points' first)")
+
         self.chkExport = QtWidgets.QCheckBox("Export Points")
         self.chkExport.setToolTip("Export points from individual chunks")
 
@@ -137,6 +140,7 @@ class SplitDlg(QtWidgets.QDialog):
         layout.addWidget(self.meshBox, 1, 3, QtCore.Qt.AlignTop)
         layout.addWidget(self.denseBox, 1, 2, QtCore.Qt.AlignTop)
 
+        layout.addWidget(self.chkCloud, 2, 4)
         layout.addWidget(self.chkClassify, 2, 2)
         layout.addWidget(self.chkExport, 2, 3)
         layout.addWidget(self.chkSave, 3, 2)
@@ -212,6 +216,7 @@ class SplitDlg(QtWidgets.QDialog):
         autosave = self.chkSave.isChecked()
         classify = self.chkClassify.isChecked()
         export = self.chkExport.isChecked()
+        clou = self.chkCloud.isChecked()
 
         quality = DENSE[self.denseBox.currentText()]
         mesh_mode = MESH[self.meshBox.currentText()]
@@ -391,6 +396,7 @@ class SplitDlg(QtWidgets.QDialog):
                     # End save Laz
                     if autosave:
                         doc.save()
+        if cloud:
 
         print("Script finished!")
         return True
