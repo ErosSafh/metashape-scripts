@@ -140,9 +140,9 @@ class SplitDlg(QtWidgets.QDialog):
         layout.addWidget(self.meshBox, 1, 3, QtCore.Qt.AlignTop)
         layout.addWidget(self.denseBox, 1, 2, QtCore.Qt.AlignTop)
 
-        layout.addWidget(self.chkCloud, 2, 4)
-        layout.addWidget(self.chkClassify, 2, 2)
-        layout.addWidget(self.chkExport, 2, 3)
+        layout.addWidget(self.chkCloud, 1.5, 4)
+        layout.addWidget(self.chkClassify, 1.5, 2)
+        layout.addWidget(self.chkExport, 1.5, 3)
         layout.addWidget(self.chkSave, 3, 2)
         layout.addWidget(self.btnP1, 3, 3)
         layout.addWidget(self.btnQuit, 3, 4)
@@ -402,7 +402,7 @@ class SplitDlg(QtWidgets.QDialog):
             FNULL = open(os.devnull, 'w')    #use this if you want to suppress output to stdout from the subprocess
             file_to_open = " -o -GLOBAL_SHIFT AUTO "
             file_to_open_current = ''
-            open_string = r"cloudcompare -AUTO_SAVE OFF -C_EXPORT_FMT LAS "
+            open_string = r"cloudcompare -SILENT -AUTO_SAVE OFF -C_EXPORT_FMT LAS "
             close_string = " -MERGE_CLOUDS -SAVE_CLOUDS"
             operations = " -SS SPATIAL 0.05"
             parte_do_meio = ''
