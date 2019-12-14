@@ -227,6 +227,7 @@ class SplitDlg(QtWidgets.QDialog):
         classify = self.chkClassify.isChecked()
         export = self.chkExport.isChecked()
         cloud = self.chkCloud.isChecked()
+        con = self.edtCon.text()
 
         quality = DENSE[self.denseBox.currentText()]
         mesh_mode = MESH[self.meshBox.currentText()]
