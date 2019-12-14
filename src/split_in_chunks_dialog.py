@@ -384,10 +384,10 @@ class SplitDlg(QtWidgets.QDialog):
         if autosave:
             doc.save()
         # Mod classify chunks
-        if classify:
-            for i in range(len(Metashape.app.document.chunks)):
-                if i + 1 < (len(Metashape.app.document.chunks)):
-                    Metashape.app.document.chunks[i + 1].dense_cloud.classifyPoints(confidence = 0.0)
+        
+            #for i in range(len(Metashape.app.document.chunks)):
+                #if i + 1 < (len(Metashape.app.document.chunks)):
+                    #Metashape.app.document.chunks[i + 1].dense_cloud.classifyPoints(confidence = 0.0)
         # Fim Mod classify
         # Save .laz
         if export:
@@ -435,22 +435,23 @@ class SplitDlg(QtWidgets.QDialog):
             if autosave:
                 doc.save()
 
-        os.chdir(tt_path)
-        i = 1
-        for file in os.listdir():
-            if file.count("Nuvem_Interpolada") >= 1:
-                src = file
-                dst = "Nuvem_Interpolada_" + str(i) + ".las"
-                os.rename(src,dst)
-                i = i + 1 
-        for file in os.listdir():
-            if (file.count("Chunk ") >= 1) and (file.count("SUBSAMPLED") >= 1) and (file.count(".las") >= 1)  :
-                src=file
-                dst="Nuvem_Interpolada.las"
-                os.rename(src,dst)
-        Metashape.app.document.chunks[0].importPoints(tt_path+"Nuvem_Interpolada.las" , format = Metashape.PointsFormatLAS, projection = crs)
-        Metashape.app.document.remove(temporary_chunks)
-        Metashape.app.document.chunk.dense_cloud.classifyPoints(confidence = float(con))
+        if classify:
+            os.chdir(tt_path)
+            i = 1
+            for file in os.listdir():
+                if file.count("Nuvem_Interpolada") >= 1:
+                    src = file
+                    dst = "Nuvem_Interpolada_" + str(i) + ".las"
+                    os.rename(src,dst)
+                    i = i + 1 
+            for file in os.listdir():
+                if (file.count("Chunk ") >= 1) and (file.count("SUBSAMPLED") >= 1) and (file.count(".las") >= 1)  :
+                    src=file
+                    dst="Nuvem_Interpolada.las"
+                    os.rename(src,dst)
+            Metashape.app.document.chunks[0].importPoints(tt_path+"Nuvem_Interpolada.las" , format = Metashape.PointsFormatLAS, projection = crs)
+            Metashape.app.document.remove(temporary_chunks)
+            Metashape.app.document.chunk.dense_cloud.classifyPoints(confidence = float(con))
 
 
 
