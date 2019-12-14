@@ -96,6 +96,13 @@ class SplitDlg(QtWidgets.QDialog):
         self.chkSave = QtWidgets.QCheckBox("Autosave")
         self.chkSave.setToolTip("Autosaves the project after each operation")
 
+        self.txtCon = QtWidgets.QLabel()
+        self.txtCon.setText("Confidence (0.0 - 1.0):")
+
+        self.edtCon = QtWidgets.QLineEdit()
+        self.edtCon.setText("0")
+        self.edtCon.setFixedSize(50, 25)
+
         self.txtOvp = QtWidgets.QLabel()
         self.txtOvp.setText("Overlap (%):")
 
@@ -146,6 +153,9 @@ class SplitDlg(QtWidgets.QDialog):
         layout.addWidget(self.chkSave, 4, 2)
         layout.addWidget(self.btnP1, 4, 3)
         layout.addWidget(self.btnQuit, 4, 4)
+
+        layout.addWidget(self.txtCon, 3, 2, QtCore.Qt.AlignRight)
+        renlayout.addWidget(self.edtCon, 3, 3, QtCore.Qt.AlignLeft)
 
         layout.addWidget(self.txtOvp, 0, 0, QtCore.Qt.AlignRight)
         layout.addWidget(self.edtOvp, 0, 1, QtCore.Qt.AlignLeft)
@@ -424,7 +434,22 @@ class SplitDlg(QtWidgets.QDialog):
             if autosave:
                 doc.save()
 
-
+        os.chdir(tt_path)
+        i = 1
+        for file in os.listdir():
+            if file.count("Nuvem_Interpolada") >= 1:
+                src = file
+                dst = "Nuvem_Interpolada_" + str(i) + ".las"
+                os.rename(src,dst)
+                i = i + 1 
+        for file in os.listdir():
+            if (file.count("Chunk ") >= 1) and (file.count("SUBSAMPLED") >= 1) and (file.count(".las") >= 1)  :
+                src=file
+                dst="Nuvem_Interpolada.las"
+                os.rename(src,dst)
+        Metashape.app.document.chunks[0].importPoints(tt_path+"Nuvem_Interpolada.las" , format = Metashape.PointsFormatLAS, projection = crs)
+        Metashape.app.document.remove(temporary_chunks)
+        Metashape.app.document.chunk.dense_cloud.classifyPoints(confidence = float(con))
 
 
 
