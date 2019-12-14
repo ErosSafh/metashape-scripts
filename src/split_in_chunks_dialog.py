@@ -155,7 +155,7 @@ class SplitDlg(QtWidgets.QDialog):
         layout.addWidget(self.btnQuit, 4, 4)
 
         layout.addWidget(self.txtCon, 3, 2, QtCore.Qt.AlignRight)
-        renlayout.addWidget(self.edtCon, 3, 3, QtCore.Qt.AlignLeft)
+        layout.addWidget(self.edtCon, 3, 3, QtCore.Qt.AlignLeft)
 
         layout.addWidget(self.txtOvp, 0, 0, QtCore.Qt.AlignRight)
         layout.addWidget(self.edtOvp, 0, 1, QtCore.Qt.AlignLeft)
