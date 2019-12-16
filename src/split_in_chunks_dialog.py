@@ -437,19 +437,20 @@ class SplitDlg(QtWidgets.QDialog):
 
         if classify:
             os.chdir(tt_path)
-            i = 1
-            h = 20
+            i = 0
+            h = 0
             for file in os.listdir():
+                h = h + 1
+                i = i + 1 
                 if file.count("Nuvem_Interpolada_") >= 1:
                     src = file
-                    h = h + 1
-                    dst = "Nuvem_Interpolada_" + str(h) + ".las"
+                    dst = "Nuvem_Interpolada_" + str(h) + str(i) + ".las"
                     os.rename(src, dst)
                 elif file.count("Nuvem_Interpolada.las") >= 1:
                     src = file
                     dst = "Nuvem_Interpolada_" + str(i) + ".las"
                     os.rename(src,dst)
-                    i = i + 1 
+                
             for file in os.listdir():
                 if (file.count("Chunk ") >= 1) and (file.count("SUBSAMPLED") >= 1) and (file.count(".las") >= 1)  :
                     src=file
