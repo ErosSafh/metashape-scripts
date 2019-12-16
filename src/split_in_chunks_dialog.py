@@ -445,7 +445,7 @@ class SplitDlg(QtWidgets.QDialog):
                     h = h + 1
                     dst = "Nuvem_Interpolada_" + str(h) + ".las"
                     os.rename(src, dst)
-                elif file.count("Nuvem_Interpolada") >= 1:
+                elif file.count("Nuvem_Interpolada.las") >= 1:
                     src = file
                     dst = "Nuvem_Interpolada_" + str(i) + ".las"
                     os.rename(src,dst)
