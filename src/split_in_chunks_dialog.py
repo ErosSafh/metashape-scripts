@@ -440,7 +440,6 @@ class SplitDlg(QtWidgets.QDialog):
             i = 0
             h = 0
             for file in os.listdir():
-                
                 if file.count("Nuvem_Interpolada_") >= 1:
                     src = file
                     dst = "Nuvem_Interpolada_" + str(h) + str(i) + ".las"
