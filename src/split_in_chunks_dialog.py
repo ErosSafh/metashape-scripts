@@ -448,8 +448,8 @@ class SplitDlg(QtWidgets.QDialog):
                     src = file
                     dst = "Nuvem_Interpolada_" + str(i) + ".las"
                     os.rename(src,dst)
-                    h = h + 1
-                    i = i + 1 
+                h = h + 1
+                i = i + 1 
             for file in os.listdir():
                 if (file.count("Chunk ") >= 1) and (file.count("SUBSAMPLED") >= 1) and (file.count(".las") >= 1)  :
                     src=file
