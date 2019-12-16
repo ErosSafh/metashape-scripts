@@ -438,7 +438,7 @@ class SplitDlg(QtWidgets.QDialog):
         if classify:
             os.chdir(tt_path)
             i = 1
-            h = 1
+            h = 2
             for file in os.listdir():
                 if file.count("Nuvem_Interpolada_" + str(h)) >= 1:
                     src = file
