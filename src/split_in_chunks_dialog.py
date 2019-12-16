@@ -458,6 +458,8 @@ class SplitDlg(QtWidgets.QDialog):
             Metashape.app.document.chunks[0].importPoints(tt_path+"Nuvem_Interpolada.las" , format = Metashape.PointsFormatLAS, projection = crs)
             Metashape.app.document.remove(temporary_chunks)
             Metashape.app.document.chunk.dense_cloud.classifyPoints(confidence = float(con))
+            if autosave:
+                doc.save()
 
 
 
