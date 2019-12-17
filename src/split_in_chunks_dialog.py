@@ -85,7 +85,7 @@ class SplitDlg(QtWidgets.QDialog):
         self.chkMerge.setToolTip("Merges back the processing products formed in the individual cells")
 
         self.chkClassify = QtWidgets.QCheckBox("Classify")
-        self.chkClassify.setToolTip("Classifies the individual chunks")
+        self.chkClassify.setToolTip("Classifies the merged and subsampled chunk")
 
         self.chkCloud = QtWidgets.QCheckBox("Merge Subsampled")
         self.chkCloud.setToolTip("Subsamples chunks and merges them")
