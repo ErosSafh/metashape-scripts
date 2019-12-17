@@ -221,7 +221,7 @@ class SplitDlg(QtWidgets.QDialog):
         mergeBack = self.chkMerge.isChecked()
         autosave = self.chkSave.isChecked()
         classify = self.chkClassify.isChecked()
-        cloud = self.chkCloud.isChecked()
+        mergeSubsampled = self.chkCloud.isChecked()
         con = self.edtCon.text()
 
         quality = DENSE[self.denseBox.currentText()]
@@ -379,7 +379,7 @@ class SplitDlg(QtWidgets.QDialog):
         if autosave:
             doc.save()
         # Save .laz
-        if cloud:
+        if mergeSubsampled:
             for i in range(len(Metashape.app.document.chunks)):
                 if i + 1 < (len(Metashape.app.document.chunks)):
                     full_path = (Metashape.app.document.path.split('/'))
@@ -396,7 +396,7 @@ class SplitDlg(QtWidgets.QDialog):
                     # End save Laz
                     if autosave:
                         doc.save()
-        if cloud:
+        if mergeSubsampled:
             import subprocess
             import os
             FNULL = open(os.devnull, 'w')    #use this if you want to suppress output to stdout from the subprocess
