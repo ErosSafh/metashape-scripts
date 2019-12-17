@@ -437,31 +437,30 @@ class SplitDlg(QtWidgets.QDialog):
 
         if classify:
             os.chdir(tt_path)
-            i = 0
-            h = 0
+            i = 1
+            dst = ''
+            for file in sorted(os.listdir()):
+                print(file)
+                if file.find("Nuvem_Interpolada") == 0 :
+                    fsplit = file.split('_')
+                    if len(fsplit) == 3 :
+                        fsplit = fsplit[2].split('.')
+                        i = int(fsplit[0]) + 1
+                    elif i < 3 :
+                        i = 2
+            if i > 1 :
+                dst = "Nuvem_Interpolada_" + str(i) + ".las"
+            else :
+               dst = "Nuvem_Interpolada.las"
             for file in os.listdir():
-                if file.count("Nuvem_Interpolada_") >= 1:
+                if (file.find("Chunk ") == 0) and (file.count("SUBSAMPLED") >= 1) and (file.count(".las") >= 1)  :
                     src = file
-                    dst = "Nuvem_Interpolada_" + str(h) + str(i) + ".las"
-                    os.rename(src, dst)
-                elif file.count("Nuvem_Interpolada.las") >= 1:
-                    src = file
-                    dst = "Nuvem_Interpolada_" + str(i) + ".las"
                     os.rename(src,dst)
-                h = h + 1
-                i = i + 1 
-            for file in os.listdir():
-                if (file.count("Chunk ") >= 1) and (file.count("SUBSAMPLED") >= 1) and (file.count(".las") >= 1)  :
-                    src=file
-                    dst="Nuvem_Interpolada.las"
-                    os.rename(src,dst)
-            Metashape.app.document.chunks[0].importPoints(tt_path+"Nuvem_Interpolada.las" , format = Metashape.PointsFormatLAS, projection = crs)
+            Metashape.app.document.chunks[0].importPoints(tt_path + dst , format = Metashape.PointsFormatLAS, projection = crs)
             Metashape.app.document.remove(temporary_chunks)
-            Metashape.app.document.chunk.dense_cloud.classifyPoints(confidence = float(con))
+            Metashape.app.document.chunks[0].dense_cloud.classifyPoints(confidence = float(con))
             if autosave:
                 doc.save()
-
-
 
         print("Script finished!")
         return True
