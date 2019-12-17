@@ -451,6 +451,9 @@ class SplitDlg(QtWidgets.QDialog):
             if autosave:
                 doc.save()
 
+        if autosave:
+                doc.save()
+
         print("Script finished!")
         return True
 
