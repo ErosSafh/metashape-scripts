@@ -383,12 +383,6 @@ class SplitDlg(QtWidgets.QDialog):
 
         if autosave:
             doc.save()
-        # Mod classify chunks
-        
-            #for i in range(len(Metashape.app.document.chunks)):
-                #if i + 1 < (len(Metashape.app.document.chunks)):
-                    #Metashape.app.document.chunks[i + 1].dense_cloud.classifyPoints(confidence = 0.0)
-        # Fim Mod classify
         # Save .laz
         if export:
             for i in range(len(Metashape.app.document.chunks)):
