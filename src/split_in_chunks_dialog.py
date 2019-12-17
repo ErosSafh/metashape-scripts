@@ -400,8 +400,8 @@ class SplitDlg(QtWidgets.QDialog):
             import subprocess
             import os
             FNULL = open(os.devnull, 'w')    #use this if you want to suppress output to stdout from the subprocess
-            file_to_open = " -o -GLOBAL_SHIFT AUTO "
-            file_to_open_current = ''
+            open_file = " -o -GLOBAL_SHIFT AUTO "
+            file_to_open = ''
             open_string = r"cloudcompare -SILENT -AUTO_SAVE OFF -C_EXPORT_FMT LAS "
             close_string = " -MERGE_CLOUDS -SAVE_CLOUDS"
             operations = " -SS SPATIAL 0.05"
@@ -417,8 +417,8 @@ class SplitDlg(QtWidgets.QDialog):
 
                     es_curr_chunk =  Metashape.app.document.chunks[a + 1].label
 
-                    file_to_open_current = "\"" + tt_path + es_curr_chunk + "\"" + ".laz"
-                    middle = middle + file_to_open + file_to_open_current + operations
+                    file_to_open = "\"" + tt_path + es_curr_chunk + "\"" + ".laz"
+                    middle = middle + open_file + file_to_open + operations
             args = open_string + middle + close_string
             subprocess.call(args, stdout=FNULL, stderr=FNULL, shell=False)
             if autosave:
