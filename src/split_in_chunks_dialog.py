@@ -146,9 +146,9 @@ class SplitDlg(QtWidgets.QDialog):
 
         layout.addWidget(self.chkCloud, 1, 4)
         layout.addWidget(self.chkClassify, 2, 2)
-        layout.addWidget(self.chkSave, 4, 2)
-        layout.addWidget(self.btnP1, 4, 3)
-        layout.addWidget(self.btnQuit, 4, 4)
+        layout.addWidget(self.chkSave, 3, 2)
+        layout.addWidget(self.btnP1, 3, 3)
+        layout.addWidget(self.btnQuit, 3, 4)
 
         layout.addWidget(self.txtCon, 2, 3, QtCore.Qt.AlignRight)
         layout.addWidget(self.edtCon, 2, 4, QtCore.Qt.AlignLeft)
