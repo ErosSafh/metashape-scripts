@@ -87,11 +87,8 @@ class SplitDlg(QtWidgets.QDialog):
         self.chkClassify = QtWidgets.QCheckBox("Classify")
         self.chkClassify.setToolTip("Classifies the individual chunks")
 
-        self.chkCloud = QtWidgets.QCheckBox("Cloud Compare")
-        self.chkCloud.setToolTip("Subsamples chunks and merges them (Check 'Export Points' first)")
-
-        self.chkExport = QtWidgets.QCheckBox("Export Points")
-        self.chkExport.setToolTip("Export points from individual chunks")
+        self.chkCloud = QtWidgets.QCheckBox("Merge Subsampled")
+        self.chkCloud.setToolTip("Subsamples chunks and merges them")
 
         self.chkSave = QtWidgets.QCheckBox("Autosave")
         self.chkSave.setToolTip("Autosaves the project after each operation")
@@ -147,15 +144,14 @@ class SplitDlg(QtWidgets.QDialog):
         layout.addWidget(self.meshBox, 1, 3, QtCore.Qt.AlignTop)
         layout.addWidget(self.denseBox, 1, 2, QtCore.Qt.AlignTop)
 
-        layout.addWidget(self.chkCloud, 2, 4)
-        layout.addWidget(self.chkClassify, 2, 2)
-        layout.addWidget(self.chkExport, 2, 3)
+        layout.addWidget(self.chkCloud, 1, 4)
+        layout.addWidget(self.chkClassify, 3, 2)
         layout.addWidget(self.chkSave, 4, 2)
         layout.addWidget(self.btnP1, 4, 3)
         layout.addWidget(self.btnQuit, 4, 4)
 
-        layout.addWidget(self.txtCon, 3, 2, QtCore.Qt.AlignRight)
-        layout.addWidget(self.edtCon, 3, 3, QtCore.Qt.AlignLeft)
+        layout.addWidget(self.txtCon, 3, 3, QtCore.Qt.AlignRight)
+        layout.addWidget(self.edtCon, 3, 4, QtCore.Qt.AlignLeft)
 
         layout.addWidget(self.txtOvp, 0, 0, QtCore.Qt.AlignRight)
         layout.addWidget(self.edtOvp, 0, 1, QtCore.Qt.AlignLeft)
@@ -225,7 +221,6 @@ class SplitDlg(QtWidgets.QDialog):
         mergeBack = self.chkMerge.isChecked()
         autosave = self.chkSave.isChecked()
         classify = self.chkClassify.isChecked()
-        export = self.chkExport.isChecked()
         cloud = self.chkCloud.isChecked()
         con = self.edtCon.text()
 
@@ -384,7 +379,7 @@ class SplitDlg(QtWidgets.QDialog):
         if autosave:
             doc.save()
         # Save .laz
-        if export:
+        if cloud:
             for i in range(len(Metashape.app.document.chunks)):
                 if i + 1 < (len(Metashape.app.document.chunks)):
                     full_path = (Metashape.app.document.path.split('/'))
